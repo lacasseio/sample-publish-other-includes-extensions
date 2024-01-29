@@ -1,0 +1,3 @@
+rootProject.name = 'sample-publish-other-includes-extensions'
+include('app')
+include('lib')

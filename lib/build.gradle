@@ -1,0 +1,15 @@
+plugins {
+    id 'cpp-library'
+    id 'maven-publish'
+}
+
+group = 'com.example'
+version = '1.0'
+
+publishing {
+    repositories {
+        maven {
+            url = "$rootDir/repo"
+        }
+    }
+}

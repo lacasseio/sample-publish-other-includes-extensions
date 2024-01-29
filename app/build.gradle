@@ -1,0 +1,20 @@
+plugins {
+    id 'cpp-application'
+    id 'cpp-unit-test'
+}
+
+repositories {
+    maven {
+        url = "$rootDir/repo"
+    }
+}
+
+application {
+    targetMachines.add(machines.macOS.x86_64)
+    dependencies {
+        implementation(providers.gradleProperty('fromRepo')
+                .map { 'com.example:lib:1.0' }
+                .orElse(project(':lib'))
+                .get())
+    }
+}
