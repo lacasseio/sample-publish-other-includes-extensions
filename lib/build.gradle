@@ -6,6 +6,17 @@ plugins {
 group = 'com.example'
 version = '1.0'
 
+if (providers.gradleProperty('includeFix').present) {
+    components.withType(CppLibrary).configureEach { library ->
+        tasks.withType(Zip).configureEach { task ->
+            if (task.name == 'cppHeaders') {
+                // We don't suggest adding all files under publicHeaderDirs as they may include much more than header files.
+                task.from(library.publicHeaderDirs.asFileTree.matching { include('**/*.i') })
+            }
+        }
+    }
+}
+
 publishing {
     repositories {
         maven {
